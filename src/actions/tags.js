@@ -1,7 +1,7 @@
 import {
     GET_TAGS_REQUEST,
     GET_TAGS_SUCCESS,
-    GET_TAGS_FAILURE,
+    GET_TAGS_FAILURE
 } from './actionConstants';
 
 const url = '/data.json';

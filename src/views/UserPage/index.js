@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './Userpage.scss';
+import './UserPage.scss';
 
-class Userpage extends Component {
-
+class UserPage extends Component {
     render() {
         const { user } = this.props;
-
         return (
             <div className="userpage">
                 <h2 className="userpage-header">Bloger`s info:</h2>
@@ -43,10 +40,4 @@ class Userpage extends Component {
     }
 }
 
-const mapStateToProps = (store) => {
-    return {
-        user: store.auth.data
-    };
-};
-
-export default connect(mapStateToProps)(Userpage);
+export default UserPage;

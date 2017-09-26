@@ -2,63 +2,63 @@ import {
     STATUS_ERROR,
     STATUS_LOADING,
     STATUS_DONE,
-    GET_POST_REQUEST,
-    GET_POST_SUCCESS,
-    GET_POST_FAILURE,
-    GET_POSTS_REQUEST,
-    GET_POSTS_SUCCESS,
-    GET_POSTS_FAILURE,
+    GET_SIGN_REQUEST,
+    GET_SIGN_SUCCESS,
+    GET_SIGN_FAILURE,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE,
 } from 'actions/actionConstants';
 
-export const post = (state = [], action) => {
+export const session = (state = [], action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case GET_POST_FAILURE:
+        case GET_SIGN_FAILURE:
             return {
                 ...state,
-                status: STATUS_ERROR
+                status: STATUS_ERROR,
+                data: payload
             };
 
-        case GET_POST_REQUEST:
+        case GET_SIGN_REQUEST:
             return {
                 ...state,
                 status: STATUS_LOADING
             };
 
-        case GET_POST_SUCCESS:
+        case GET_SIGN_SUCCESS:
             return {
                 ...state,
                 status: STATUS_DONE,
-                items: payload
+                data: payload
             };
-
         default:
             return state;
     }
 };
 
-export const posts = (state = [], action) => {
+export const user = (state = [], action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case GET_POSTS_FAILURE:
+        case GET_USER_FAILURE:
             return {
                 ...state,
                 status: STATUS_ERROR
             };
 
-        case GET_POSTS_REQUEST:
+        case GET_USER_REQUEST:
             return {
                 ...state,
                 status: STATUS_LOADING
             };
 
-        case GET_POSTS_SUCCESS:
+        case GET_USER_SUCCESS:
             return {
                 ...state,
                 status: STATUS_DONE,
-                items: payload
+                data: payload
             };
 
         default:

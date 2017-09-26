@@ -4,6 +4,14 @@
   background: #fff;
 }
 
+.tags {
+  padding: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+
+  list-style-type: none;
+}
+
 .tags a {
     padding: 2px 5px;
     margin: 0 5px;

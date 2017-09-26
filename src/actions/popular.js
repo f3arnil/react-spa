@@ -25,7 +25,7 @@ const getPopularFailure = () => {
     };
 };
 
-export const getPopulars = () => {
+export const getPopular = () => {
     return (dispatch) => {
         dispatch(getPopularRequest());
 

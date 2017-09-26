@@ -9,10 +9,10 @@ const port = 3000;
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const HTML_FILE = path.resolve(DIST_DIR, 'index.html');
 const isDevelopment = process.env.NODE_ENV === 'development';
-const config = isDevelopment ? require('./webpack.dev.config.js') : require('./webpack.config.js');
+const config = require('./webpack.config.js');
 const compiler = webpack(config);
 
-if(isDevelopment) {
+if (isDevelopment) {
     app.use(webpackDevMiddleware(compiler, {
         noInfo: true,
         publicPath: config.output.publicPath
@@ -22,7 +22,7 @@ if(isDevelopment) {
 
     app.use(express.static(DIST_DIR));
 
-    app.get("*", (req, res, next) => {
+    app.get('*', (req, res, next) => {
         compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
             if (err) {
                 return next(err);
@@ -36,7 +36,7 @@ if(isDevelopment) {
 } else {
     app.use(express.static(DIST_DIR));
 
-    app.get("*", (req, res) => res.sendFile(HTML_FILE));
+    app.get('*', (req, res) => res.sendFile(HTML_FILE));
 }
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

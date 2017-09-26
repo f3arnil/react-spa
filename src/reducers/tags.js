@@ -5,7 +5,7 @@ import {
     GET_TAGS_REQUEST,
     GET_TAGS_SUCCESS,
     GET_TAGS_FAILURE,
-} from '../actions/actionConstants';
+} from 'actions/actionConstants';
 
 export const tags = (state = [], action) => {
     const { type, payload } = action;

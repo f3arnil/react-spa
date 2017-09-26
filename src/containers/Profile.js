@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Articles from 'views/Articles';
 import PreLoader from 'views/PreLoader';
-import { getPosts } from 'actions/posts';
+import UserPage from 'views/UserPage';
 import {
     STATUS_ERROR,
     STATUS_LOADING,
     STATUS_DONE,
 } from 'actions/actionConstants';
 
-class Posts extends Component {
+class Profile extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
-        this.tag = this.props.match.params.tag || false;
-
-        dispatch(getPosts(this.tag));
     }
 
     getContent() {
-        const { status, posts } = this.props;
+        const { status, user } = this.props;
 
         switch (status) {
             case STATUS_ERROR:
-                return <p>There was an error loading the items</p>;
+                return <p>Error while loading user profile</p>;
 
             case STATUS_LOADING:
                 return <PreLoader />;
 
             case STATUS_DONE:
-                return <Articles posts={posts} tag={this.tag} />;
+                return <UserPage user={user} />;
 
             default:
                 return <PreLoader />;
@@ -37,18 +33,16 @@ class Posts extends Component {
 
     render() {
         return (
-            <section className="articles">
-                { this.getContent() }
-            </section>
+            <section>{this.getContent()}</section>
         );
     }
 }
 
 const mapStateToProps = (store) => {
     return {
-        posts: store.posts.items,
-        status: store.posts.status
+        user: store.session.data,
+        status: store.session.status
     };
 };
 
-export default connect(mapStateToProps)(Posts);
+export default connect(mapStateToProps)(Profile);

@@ -1,7 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 const config = {
     entry: {
@@ -10,12 +14,15 @@ const config = {
     devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
+            title: 'Blog',
             template: 'public/index.html'
         }),
         new ExtractTextPlugin('style.css'),
         new CopyWebpackPlugin([
             { from: 'src/resources/data.json' },
-            { from: 'src/resources/img/logo.jpg', to: 'img/' }
+            { from: 'src/resources/img/logo.jpg', to: 'img/' },
+            { from: 'node_modules/font-awesome/fonts', to: 'fonts' },
+            { from: 'node_modules/font-awesome/css/font-awesome.min.css' },
         ])
     ],
     output: {
@@ -87,7 +94,7 @@ const config = {
                 })
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
+                test: /.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
                 use: [
                     'url-loader?limit=10000',
                     'img-loader'
@@ -99,5 +106,17 @@ const config = {
         fs: 'empty'
     }
 };
+
+if (isDevelopment) {
+    config.output.publicPath = '/';
+
+    config.devtool = 'inline-source-map';
+
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
+} else {
+    config.devtool = 'source-map';
+    config.plugins.push(new CleanWebpackPlugin(['dist']));
+    config.plugins.push(new UglifyJSPlugin({ sourceMap: true }));
+}
 
 module.exports = config;

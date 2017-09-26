@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as titles from './NavConstants';
+import {
+    STATUS_DONE,
+} from '../../actions/actionConstants';
 import './Nav.scss';
 
 class Nav extends Component {
     render() {
-        const { user } = this.props;
+        const { status, user } = this.props;
         const pages = [
+            {
+                title: titles.HOME_TITLE,
+                link: '/'
+            },
             {
                 title: titles.ABOUT_TITLE,
                 link: '/about'
@@ -22,31 +29,41 @@ class Nav extends Component {
             }
         ];
 
-        const login = user ? {
-            title: user.email,
-            link: '/userpage'
-        } : {
-            title: titles.SIGN_UP_TITLE,
-            link: '/signup'
-        };
-
-        pages.push(login);
-
         const links = pages.map(
-            ({ title, link }) => <Link key={title.toString()} to={link}>{title}</Link>
+            ({ title, link }) => <Link key={title} to={link}>{title}</Link>
         );
 
+        const userLinks = status === STATUS_DONE ?
+            <div className="col-xs-4 center-xs auth">
+                <Link to="/profile">{user.email}</Link>
+            </div> :
+            <div className="col-xs-4 center-xs auth">
+                <Link to="/signup">
+                    <i className="fa fa-lock" /> {titles.SIGN_UP_TITLE}
+                </Link> |
+                <Link to="/signin">
+                    <i className="fa fa-user" /> {titles.SIGN_IN_TITLE}
+                </Link>
+                <Link to="">
+                    <i className="fa fa-search" />
+                </Link>
+            </div>;
+
         return (
-            <aside className="nav">
-                {links}
-            </aside>
+            <div className="row navigation">
+                <nav className="col-xs-8 center-xs">
+                    {links}
+                </nav>
+                {userLinks}
+            </div>
         );
     }
 }
 
 const mapStateToProps = (store) => {
     return {
-        user: store.auth.data
+        user: store.session.data,
+        status: store.session.status
     };
 };
 

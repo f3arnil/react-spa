@@ -7,7 +7,7 @@ import {
     GET_POPULAR_FAILURE,
 } from '../actions/actionConstants';
 
-export const populars = (state = [], action) => {
+export const popular = (state = [], action) => {
     const { type, payload } = action;
 
     switch (type) {

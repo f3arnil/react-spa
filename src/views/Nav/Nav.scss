@@ -1,9 +1,10 @@
 @import '~styles/core.scss';
 
-.nav {
+.navigation {
   a {
     position: relative;
-    padding: 5px 30px;
+    padding: 5px;
+    margin: 0 30px;
 
     color: $base-font-color;
 
@@ -33,25 +34,17 @@
       transition: all 0.2s ease-in-out 0s;
     }
 
-    &:last-child {
-      border: 2px solid $base-font-color;
-      border-radius: 15px;
-
-      &:hover {
-        background: $base-font-color;
-        color: #fff;
-
-        &:before {
-          visibility: hidden;
-        }
-      }
-    }
-
     &:hover {
       &:before {
         visibility: visible;
         transform: scaleX(1);
       }
     }
+  }
+}
+
+.auth {
+  a {
+    margin: 0 10px;
   }
 }

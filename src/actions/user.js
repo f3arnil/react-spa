@@ -1,48 +1,50 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PreLoader from 'views/PreLoader';
-import UserPage from 'views/UserPage';
 import {
-    STATUS_ERROR,
-    STATUS_LOADING,
-    STATUS_DONE,
-} from 'actions/actionConstants';
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE,
+} from './actionConstants';
 
-class Profile extends Component {
-    componentDidMount() {
-        const { dispatch } = this.props;
-    }
+const url = '/data.json';
 
-    getContent() {
-        const { status, user } = this.props;
-
-        switch (status) {
-            case STATUS_ERROR:
-                return <p>Error while loading user profile</p>;
-
-            case STATUS_LOADING:
-                return <PreLoader />;
-
-            case STATUS_DONE:
-                return <UserPage user={user} />;
-
-            default:
-                return <PreLoader />;
-        }
-    }
-
-    render() {
-        return (
-            <section>{this.getContent()}</section>
-        );
-    }
-}
-
-const mapStateToProps = (store) => {
+const getUserRequest = () => {
     return {
-        user: store.session.data,
-        status: store.session.status
+        type: GET_USER_REQUEST
     };
 };
 
-export default connect(mapStateToProps)(Profile);
+const getUserSuccess = (user) => {
+    return {
+        type: GET_USER_SUCCESS,
+        payload: user
+    };
+};
+
+const getUserFailure = () => {
+    return {
+        type: GET_USER_FAILURE
+    };
+};
+
+export const loadUser = (userId) => {
+    return (dispatch) => {
+        dispatch(getUserRequest());
+
+        fetch(url)
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+
+                return response;
+            })
+            .then((response) => response.json())
+            .then((response) => {
+                response.users.map((user) => {
+                    if (userId == user.id) {
+                        dispatch(getUserSuccess(user));
+                    }
+                });
+            })
+            .catch((response) => dispatch(getUserFailure(response)));
+    };
+};

@@ -7,7 +7,7 @@ class Search extends Component {
         return (
             <input
                 type="text"
-                placeholder="Search by tags"
+                placeholder="Search"
             />
         );
     }

@@ -4,21 +4,21 @@ import './Tags.scss';
 class Tags extends Component {
     render() {
         const { type, tags } = this.props;
-        const links = tags.map((tag) => <a key={tag.toString()} href="#">{tag}</a>);
+        const links = tags.map((tag) => <li key={tag.toString()}><a href={`/tag/${tag}`}>{tag}</a></li>);
 
         switch (type) {
             case 'sidebar':
                 return (
                     <section className="tags-wrapper">
                         <h2>Tags</h2>
-                        <span className="tags">
+                        <ul className="tags">
                             {links}
-                        </span>
+                        </ul>
                     </section>
                 );
 
             default:
-                return <span className="tags">{links}</span>;
+                return <ul className="tags">{links}</ul>;
         }
     }
 }
