@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PreLoader from 'views/PreLoader';
 import UserPage from 'views/UserPage';
+import { getPosts } from 'actions/posts';
 import {
     STATUS_ERROR,
     STATUS_LOADING,
@@ -11,10 +12,12 @@ import {
 class Profile extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
+
+        dispatch(getPosts());
     }
 
     getContent() {
-        const { status, user } = this.props;
+        const { status, user, posts } = this.props;
 
         switch (status) {
             case STATUS_ERROR:
@@ -24,7 +27,7 @@ class Profile extends Component {
                 return <PreLoader />;
 
             case STATUS_DONE:
-                return <UserPage user={user} />;
+                return <UserPage user={user} posts={posts} />;
 
             default:
                 return <PreLoader />;
@@ -41,7 +44,8 @@ class Profile extends Component {
 const mapStateToProps = (store) => {
     return {
         user: store.session.data,
-        status: store.session.status
+        status: store.session.status,
+        posts: store.posts.items
     };
 };
 

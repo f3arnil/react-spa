@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Tags.scss';
 
 class Tags extends Component {
     render() {
         const { type, tags } = this.props;
-        const links = tags.map((tag) => <li key={tag.toString()}><a href={`/tag/${tag}`}>{tag}</a></li>);
+        const links = tags.map(tag => <li key={tag.toString()}><Link to={`/tag/${tag}`}>{tag}</Link></li>);
 
         switch (type) {
             case 'sidebar':

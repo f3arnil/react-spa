@@ -1,14 +1,22 @@
 import React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import MainLayout from 'views/LayoutMain';
+import asyncComponent from './containers/asyncComponent';
 
-import Home from 'views/Home';
-import About from 'views/About';
-import SignUp from 'views/SignUp';
-import User from 'containers/User';
-import Profile from 'containers/Profile';
-import Posts from 'containers/Posts';
-import Post from 'containers/Post';
+const Home = asyncComponent(() => import('views/Home')
+    .then(module => module.default), { name: 'Home' });
+const Posts = asyncComponent(() => import('containers/Posts')
+    .then(module => module.default), { name: 'Posts' });
+const Post = asyncComponent(() => import('containers/Post')
+    .then(module => module.default), { name: 'Post' });
+const User = asyncComponent(() => import('containers/User')
+    .then(module => module.default), { name: 'User' });
+const Profile = asyncComponent(() => import('containers/Profile')
+    .then(module => module.default), { name: 'Profile' });
+const SignUp = asyncComponent(() => import('views/SignUp')
+    .then(module => module.default), { name: 'Posts' });
+const About = asyncComponent(() => import('views/About')
+    .then(module => module.default), { name: 'About' });
 
 export default (
     <BrowserRouter>

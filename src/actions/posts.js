@@ -63,6 +63,10 @@ export const getPosts = (tag) => {
             .then((response) => {
                 let posts = response.posts;
 
+                posts.sort((a, b) => {
+                    return b.date - a.date;
+                });
+
                 if (tag) {
                     posts = posts.filter((post) => { return post.tags.indexOf(tag) !== -1; });
                 }

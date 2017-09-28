@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
+
 import './UserPage.scss';
 
 class UserPage extends Component {
     render() {
-        const { user } = this.props;
+        const { user, posts } = this.props;
+        const list = [];
+        posts.map((post) => {
+            if (user.posted.indexOf(post.id) !== -1) {
+                list.push(post);
+            }
+        });
+
         return (
             <div className="userpage">
                 <h2 className="userpage-header">Bloger`s info:</h2>
@@ -29,10 +39,19 @@ class UserPage extends Component {
                 <div className="userpage-user-posts">
                     <p>Users posts:</p>
                     <ul>
-                        <li><a href="#">Lorem ipsum | <small>05.08.2016</small></a></li>
-                        <li><a href="#">Lorem ipsum dolor | <small>01.02.2017</small></a></li>
-                        <li><a href="#">Lorem | <small>12.08.2015</small></a></li>
-                        <li><a href="#">Lorem ips | <small>07.07.2007</small></a></li>
+                        {
+                            list.map((posted) => {
+                                return (
+                                    <li key={posted.id}>
+                                        <Link to={`/post/${posted.id}`}> {posted.title}
+                                            | <small>
+                                                <Moment format="DD MMM YYYY" unix>{posted.date}</Moment>
+                                            </small>
+                                        </Link>
+                                    </li>
+                                );
+                            })
+                        }
                     </ul>
                 </div>
             </div>
