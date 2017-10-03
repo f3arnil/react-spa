@@ -19,24 +19,6 @@ class Sidebar extends Component {
         dispatch(getPopular());
     }
 
-    initTags() {
-        const { tagsStatus, tags } = this.props;
-
-        switch (tagsStatus) {
-            case STATUS_ERROR:
-                return <p>There was an error loading the tags</p>;
-
-            case STATUS_LOADING:
-                return <PreLoader />;
-
-            case STATUS_DONE:
-                return <Tags type="sidebar" tags={ tags } />;
-
-            default:
-                return <PreLoader />;
-        }
-    }
-
     initPopular() {
         const { popular, popularStatus } = this.props;
 
@@ -50,6 +32,24 @@ class Sidebar extends Component {
 
             case STATUS_DONE:
                 return <SidebarPosts populars={popular} />;
+        }
+    }
+
+    initTags() {
+        const { tagsStatus, tags } = this.props;
+
+        switch (tagsStatus) {
+            case STATUS_ERROR:
+                return <p>There was an error loading the tags</p>;
+
+            case STATUS_LOADING:
+                return <PreLoader />;
+
+            case STATUS_DONE:
+                return <Tags type="sidebar" tags={tags} />;
+
+            default:
+                return <PreLoader />;
         }
     }
 

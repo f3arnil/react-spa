@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PreLoader from 'views/PreLoader';
 import UserPage from 'views/UserPage';
-import { getPosts } from 'actions/posts';
 import {
     STATUS_ERROR,
     STATUS_LOADING,
@@ -10,12 +9,6 @@ import {
 } from 'actions/actionConstants';
 
 class Profile extends Component {
-    componentDidMount() {
-        const { dispatch } = this.props;
-
-        dispatch(getPosts());
-    }
-
     getContent() {
         const { status, user, posts } = this.props;
 

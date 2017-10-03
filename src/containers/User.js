@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PreLoader from 'views/PreLoader';
 import UserPage from 'views/UserPage';
 import { loadUser } from 'actions/user';
-import { getPosts } from 'actions/posts';
+import { getPagePosts } from 'actions/pageposts';
 import {
     STATUS_ERROR,
     STATUS_LOADING,
@@ -15,8 +15,8 @@ class User extends Component {
         const { dispatch } = this.props;
         const id = this.props.match.params.id;
 
+        dispatch(getPagePosts());
         dispatch(loadUser(id));
-        dispatch(getPosts());
     }
 
     getContent() {
@@ -47,7 +47,7 @@ const mapStateToProps = (store) => {
     return {
         user: store.user.data,
         status: store.user.status,
-        posts: store.posts.items
+        posts: store.pageposts.items
     };
 };
 

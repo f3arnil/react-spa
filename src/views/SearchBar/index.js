@@ -5,10 +5,13 @@ import './SearchBar.scss';
 class Search extends Component {
     render() {
         return (
-            <input
-                type="text"
-                placeholder="Search"
-            />
+            <section>
+                <input
+                    className="search-bar"
+                    type="text"
+                    placeholder="Search"
+                />
+            </section>
         );
     }
 }

@@ -39,13 +39,13 @@ export const getPopular = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                const populars = response.posts;
-                const sorted = populars.slice(0);
-                sorted.sort((a, b) => {
+                let populars = response.posts;
+                populars = populars.slice(0);
+                populars.sort((a, b) => {
                     return b.views - a.views;
                 });
-                const top = sorted.slice(0, 3);
-                return dispatch(getPopularSuccess(top));
+                populars = populars.slice(0, 3);
+                return dispatch(getPopularSuccess(populars));
             })
             .catch((response) => dispatch(getPopularFailure(response)));
     };
