@@ -7,6 +7,7 @@ import './UserPage.scss';
 class UserPage extends Component {
     render() {
         const { user, posts } = this.props;
+        console.log(user);
         const list = [];
         posts.map((post) => {
             if (user.posted.indexOf(post.id) !== -1) {
