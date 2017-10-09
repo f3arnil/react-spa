@@ -5,6 +5,10 @@
   transition: all 500ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
+.app__content {
+  padding: 50px 0 150px 0;
+}
+
 .app__header,
 .app__footer {
   padding: 16px;
@@ -17,8 +21,4 @@
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-.app__posts {
-  margin: 50px 0 100px 0;
 }

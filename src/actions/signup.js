@@ -1,32 +1,35 @@
-import { GET_SIGN_REQUEST, GET_SIGN_SUCCESS, GET_SIGN_FAILURE } from 'constants/actionTypes';
+import {
+    GET_SIGN_REQUEST,
+    GET_SIGN_SUCCESS,
+    GET_SIGN_FAILURE,
+} from './actionConstants';
 import { SubmissionError } from 'redux-form';
 
 const getSignRequest = () => {
     return {
         type: GET_SIGN_REQUEST
-    }
+    };
 };
 
 const getSignSuccess = (users) => {
     return {
         type: GET_SIGN_SUCCESS,
         payload: users
-    }
+    };
 };
 
 const getSignFailure = (error) => {
     return {
         type: GET_SIGN_FAILURE,
         payload: error
-    }
+    };
 };
-
-
 
 export const getSign = (values, dispatch) => {
     const url = './data.json';
 
     dispatch(getSignRequest());
+
     fetch(url)
         .then((response) => {
             if (!response.ok) {

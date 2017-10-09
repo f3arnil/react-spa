@@ -3,6 +3,10 @@ import { Field, reduxForm } from 'redux-form';
 import { getSign } from '../../actions/signup';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import {
+    STATUS_ERROR,
+    STATUS_DONE,
+} from '../../actions/actionConstants';
 import './SignUp.scss';
 
 const renderField = ({ input, label, type }) =>
@@ -13,8 +17,8 @@ const renderField = ({ input, label, type }) =>
 class SignUp extends Component {
     render() {
         const { status, data, error, handleSubmit, submitting } = this.props;
-        const errorMsg = status === 'error' ? data.errors._error : false;
-        if (status === 'done') {
+        const errorMsg = status === STATUS_ERROR ? data.errors._error : false;
+        if (status === STATUS_DONE) {
             return <Redirect to="/posts" />;
         }
         return (
@@ -36,9 +40,10 @@ class SignUp extends Component {
                         />
                         <small>
                             {errorMsg &&
-                            <small>
-                                {errorMsg}
-                            </small>}
+                                <small>
+                                    {errorMsg}
+                                </small>
+                            }
                         </small>
                         <div className="auth-form-buttons">
                             <button type="submit" disabled={submitting}>
@@ -54,8 +59,8 @@ class SignUp extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        status: store.auth.status,
-        data: store.auth.data
+        status: store.session.status,
+        data: store.session.data
     };
 };
 

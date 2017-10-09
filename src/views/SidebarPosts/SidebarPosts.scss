@@ -1,0 +1,19 @@
+@import '~styles/core.scss';
+
+.popular-wrapper {
+  background-color: #ffffff;
+
+  .popular {
+    background-color: #616161;
+  }
+
+  .popular-image {
+    width: 100%;
+  }
+
+  .popular-title {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+}

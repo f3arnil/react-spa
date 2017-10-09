@@ -1,12 +1,22 @@
 import React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import MainLayout from 'views/LayoutMain';
+import asyncComponent from './containers/asyncComponent';
 
-import Home from 'views/Home';
-import About from 'views/About';
-import SignUp from 'views/SignUp';
-import PostsContainer from 'containers/PostsContainer';
-import PostContainer from 'containers/PostContainer';
+const Home = asyncComponent(() => import('views/Home')
+    .then(module => module.default), { name: 'Home' });
+const Posts = asyncComponent(() => import('containers/Posts')
+    .then(module => module.default), { name: 'Posts' });
+const Post = asyncComponent(() => import('containers/Post')
+    .then(module => module.default), { name: 'Post' });
+const User = asyncComponent(() => import('containers/User')
+    .then(module => module.default), { name: 'User' });
+const Profile = asyncComponent(() => import('containers/Profile')
+    .then(module => module.default), { name: 'Profile' });
+const SignUp = asyncComponent(() => import('views/SignUp')
+    .then(module => module.default), { name: 'Posts' });
+const About = asyncComponent(() => import('views/About')
+    .then(module => module.default), { name: 'About' });
 
 export default (
     <BrowserRouter>
@@ -14,9 +24,12 @@ export default (
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
-                <Route path="/posts" component={PostsContainer} />
-                <Route path="/post/:id" component={PostContainer} />
+                <Route path="/posts" key="all" component={Posts} />
+                <Route path="/post/:id" component={Post} />
                 <Route path="/signup" component={SignUp} />
+                <Route path="/profile/" component={Profile} />
+                <Route path="/user/:id" key="user" component={User} />
+                <Route path="/tag/:tag" key="filtered" component={Posts} />
             </Switch>
         </MainLayout>
     </BrowserRouter>

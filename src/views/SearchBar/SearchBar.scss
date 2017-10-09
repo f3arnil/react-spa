@@ -1,0 +1,13 @@
+@import '~styles/core.scss';
+
+.search-bar {
+  border-radius: 50px;
+  padding: 10px;
+  width: 90%;
+  border: none;
+  color: $base-font-color;
+  font-size: $base-font-size;
+  font-family: $base-font-family;
+  line-height: $base-line-height;
+  outline: none;
+}

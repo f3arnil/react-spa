@@ -1,0 +1,37 @@
+@import '~styles/core.scss';
+
+.userpage {
+  padding: 30px 40px;
+  background-color: white;
+  b {
+    padding: 10px;
+  }
+}
+.userpage-image {
+  margin: 35px 35px 0px 0px;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}
+
+.userpage-header {
+
+}
+
+.userpage-user-posts {
+  ul {
+    list-style: none;
+      li>a {
+        text-decoration: none;
+        color: $base-font-color;
+        font-size: $base-font-size;
+        transition: 0.2s;
+        padding: 5px;
+        &:hover {
+          margin-left: 10px;
+          color: #eaeaea;
+          background-color: $primary-font-color;
+      }
+    }
+  }
+}

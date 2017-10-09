@@ -6,13 +6,16 @@ import './Articles.scss';
 
 class Articles extends Component {
     render() {
-        const posts = this.props.posts;
+        const { posts, tag } = this.props;
         const symbolsAmount = 300;
+
+        const searchTitle = tag ? <p>Search results by tag: {tag} </p> : null;
 
         return (
             <div>
+                {searchTitle}
                 {posts.map((
-                    { id, img, date, title, author, tags, content }
+                    { id, img, date, title, author, author_id, tags, content }
                 ) => {
                     const contentShort = `${content.substr(0, symbolsAmount)}...`;
 
@@ -27,8 +30,8 @@ class Articles extends Component {
                             </div>
                             <footer>
                                 <div className="article-info">
-                                    <a href><Moment format="DD MMM YYYY" unix>{date}</Moment></a>
-                                    <a href> by {author}</a>
+                                    <Link to=""><Moment format="DD MMM YYYY" unix>{date}</Moment></Link>
+                                    <Link to={`/user/${author_id}`}> by {author}</Link>
                                     <span className="article-dot" />
                                     <Tags tags={tags} />
                                 </div>
