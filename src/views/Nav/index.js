@@ -21,7 +21,7 @@ class Nav extends Component {
             },
             {
                 title: titles.BLOG_TITLE,
-                link: '/posts'
+                link: '/page/1'
             },
             {
                 title: titles.CONTACT_TITLE,

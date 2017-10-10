@@ -94,3 +94,18 @@ article {
     }
   }
 }
+
+.pagination {
+  a {
+    background-color: #c8c8c8;
+    line-height: $base-line-height;
+    font-size: large;
+    font-weight: 400;
+    text-decoration: none;
+    color: $base-font-color;
+    transition: 0.2s;
+    &:hover {
+      color: #0f1101;
+    }
+  }
+}

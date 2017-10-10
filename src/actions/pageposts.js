@@ -39,12 +39,8 @@ export const getPagePosts = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                let posts = response.posts;
-
-                posts.sort((a, b) => {
-                    return b.date - a.date;
-                });
-
+                const posts = response.posts;
+                posts.sort((a, b) => b.date - a.date);
                 dispatch(getPagePostsSuccess(posts));
             })
             .catch((response) => dispatch(getPagePostsFailure(response)));
