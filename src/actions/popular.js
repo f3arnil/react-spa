@@ -39,12 +39,9 @@ export const getPopular = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                let populars = response.posts;
-                populars = populars.slice(0);
-                populars.sort((a, b) => {
-                    return b.views - a.views;
-                });
-                populars = populars.slice(0, 3);
+                const populars = response.posts
+                    .sort((a, b) => b.views - a.views)
+                    .slice(0, 3);
                 return dispatch(getPopularSuccess(populars));
             })
             .catch((response) => dispatch(getPopularFailure(response)));

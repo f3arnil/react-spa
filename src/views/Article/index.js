@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import Tags from 'views/Tags';
+import Comments from 'containers/Comments';
+import '../Articles/Articles.scss';
 
 class Article extends Component {
     render() {
@@ -10,7 +12,7 @@ class Article extends Component {
         return (
             <article key={id}>
                 <header>
-                    <h1 className="article-title"><Link to={"/post/" + id}>{title}</Link></h1>
+                    <h1 className="article-title"><Link to={'/post/' + id}>{title}</Link></h1>
                     <img alt={title} src={img} className="article-image"/>
                 </header>
                 <div className="article-content">
@@ -24,6 +26,7 @@ class Article extends Component {
                         <Tags tags={tags} />
                     </div>
                 </footer>
+                <Comments post_id={id} />
             </article>
         );
     }

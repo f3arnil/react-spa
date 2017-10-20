@@ -32,16 +32,13 @@ export const getSign = (values, dispatch) => {
 
     fetch(url)
         .then((response) => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-
+            if (!response.ok) { throw Error(response.statusText); }
             return response;
         })
         .then((response) => response.json())
         .then((users) => {
             const usersArr = (users.users).map((user) => user.email);
-            if(!usersArr.includes(values.username)) {
+            if (!usersArr.includes(values.username)) {
                 throw new SubmissionError({
                     _error: 'Login failed, user with such email does not exist'
                 });

@@ -47,7 +47,7 @@ const getPostsFailure = () => {
     };
 };
 
-export const getPosts = (tag) => {
+export const getPosts = (options) => {
     return (dispatch) => {
         dispatch(getPostsRequest());
 
@@ -61,15 +61,32 @@ export const getPosts = (tag) => {
             })
             .then((response) => response.json())
             .then((response) => {
-                let posts = response.posts;
-
-                posts.sort((a, b) => {
+                let posts = response.posts.sort((a, b) => {
                     return b.date - a.date;
                 });
 
-                if (tag) {
-                    posts = posts.filter((post) => { return post.tags.indexOf(tag) !== -1; });
+                const postsLength = posts.length;
+
+                if (options.tag) {
+                    posts = posts.filter((post) => {
+                        return post.tags.indexOf(options.tag) !== -1;
+                    });
                 }
+
+                if (options.page) {
+                    const firstElem = options.page !== 1 ?
+                        (options.page - 1) * options.limit :
+                        ((options.page - 1) * options.limit) + 1;
+                    const lastElem = firstElem + options.limit;
+
+                    posts = posts.slice(firstElem, lastElem);
+                }
+
+                posts = {
+                    data: posts,
+                    length: postsLength,
+                    limit: options.limit
+                };
 
                 dispatch(getPostsSuccess(posts));
             })

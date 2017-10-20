@@ -1,0 +1,33 @@
+@import '~styles/core.scss';
+.comment-wrapper {
+  background-color: $content-bg-color;
+  color: $tags-bg-color;
+  font-family: $base-font-family;
+}
+
+.comment-form {
+  textarea {
+    width: 80%;
+    height: 100px;
+    color: $tags-bg-color;
+    outline: none;
+    resize: none;
+    background-color: #6d6d6d;
+  }
+
+  .app-comments-buttons button{
+    padding: 10px;
+    margin: 5px;
+    font-size: $base-font-size;
+    border: none;
+    border-radius: 0;
+  }
+}
+
+.app-comments {
+  .app-comment {
+    color: $base-font-color;
+    margin: 20px;
+    background-color: #c8c8c8;
+  }
+}

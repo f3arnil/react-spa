@@ -21,6 +21,7 @@ class User extends Component {
 
     getContent() {
         const { status, user, posts } = this.props;
+
         switch (status) {
             case STATUS_ERROR:
                 return <p>Error while loading user profile</p>;

@@ -24,7 +24,7 @@ class SignUp extends Component {
         return (
             <div className="row">
                 <div className="col-xs-12">
-                    <h2 className="center-xs">Singing up PLEASE</h2>
+                    <h2 className="center-xs">Sing up here:</h2>
                     <form className="auth-form" onSubmit={handleSubmit(getSign)}>
                         <Field
                             name="username"
